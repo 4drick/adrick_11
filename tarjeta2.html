@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Corazón Roto</title>
+  <style>
+    body {
+      margin: 0;
+      background: #363636;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+
+    .heart {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: red;
+      top: 0;
+      left: 75px;
+      transform: rotate(-45deg);
+      animation: beat 1s infinite;
+      box-shadow: 0 0 30px red;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -75px;
+      left: 0;
+    }
+
+    .heart::after {
+      top: 0;
+      left: 75px;
+    }
+
+    .left-half,
+    .right-half {
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: red;
+      top: 0;
+      opacity: 0;
+      transform: rotate(-45deg);
+      box-shadow: 0 0 30px red;
+    }
+
+    .left-half::before,
+    .left-half::after,
+    .right-half::before,
+    .right-half::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .left-half::before {
+      top: -75px;
+      left: 0;
+    }
+
+    .left-half::after {
+      top: 0;
+      left: 75px;
+    }
+
+    .right-half::before {
+      top: -75px;
+      left: 0;
+    }
+
+    .right-half::after {
+      top: 0;
+      left: 75px;
+    }
+
+    @keyframes beat {
+      0% { transform: scale(1) rotate(-45deg); }
+      50% { transform: scale(1.1) rotate(-45deg); }
+      100% { transform: scale(1) rotate(-45deg); }
+    }
+
+    .broken-left {
+      opacity: 1;
+      animation: separateLeft 2s forwards;
+    }
+
+    .broken-right {
+      opacity: 1;
+      animation: separateRight 2s forwards;
+    }
+
+    @keyframes separateLeft {
+      0% { transform: rotate(-45deg) translateX(0); }
+      100% { transform: rotate(-45deg) translateX(-150px); }
+    }
+
+    @keyframes separateRight {
+      0% { transform: rotate(-45deg) translateX(0); }
+      100% { transform: rotate(-45deg) translateX(150px); }
+    }
+
+    .message {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #ffffff;
+      font-size: 24px;
+      font-weight: bold;
+      opacity: 0;
+      animation: showMessage 2s ease 3s forwards;
+      text-align: center;
+    }
+
+    @keyframes showMessage {
+      from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+      to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="heart" id="heart"></div>
+    <div class="left-half" id="leftHalf"></div>
+    <div class="right-half" id="rightHalf"></div>
+    <div class="message">Cada día que pasa te vuelves más importante para mí, tu forma de ser es  muy especial y bonito </div>
+  </div>
+
+  <script>
+    setTimeout(() => {
+      document.getElementById('heart').style.display = 'none';
+      document.getElementById('leftHalf').classList.add('broken-left');
+      document.getElementById('rightHalf').classList.add('broken-right');
+    }, 3000);
+  </script>
+</body>
+</html>
